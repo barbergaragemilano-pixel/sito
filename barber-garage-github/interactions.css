@@ -1,0 +1,13 @@
+[data-hover="1"]:is(:hover,:focus-visible){color:var(--ink) !important;}
+[data-hover="2"]:is(:hover,:focus-visible){color:var(--ink) !important;}
+[data-hover="3"]:is(:hover,:focus-visible){opacity:.8 !important;color:var(--btn-ink) !important;}
+[data-hover="4"]:is(:hover,:focus-visible){background:#cfbb5b !important;color:#121212 !important;}
+[data-hover="5"]:is(:hover,:focus-visible){border-color:#fff !important;color:#fff !important;background:rgba(255,255,255,.1) !important;}
+[data-hover="6"]:is(:hover,:focus-visible){border-color:var(--ink) !important;color:var(--ink) !important;}
+[data-hover="7"]:is(:hover,:focus-visible){opacity:.85 !important;color:var(--btn-ink) !important;}
+[data-hover="8"]:is(:hover,:focus-visible){opacity:.85 !important;color:var(--btn-ink) !important;}
+[data-hover="9"]:is(:hover,:focus-visible){border-color:var(--ink) !important;color:var(--ink) !important;}
+
+[hidden]{display:none !important;}
+@media(min-width:900px){[data-nav-links]{display:flex !important;}}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:4px;}

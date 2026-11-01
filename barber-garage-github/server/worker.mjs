@@ -32,7 +32,8 @@ export async function authorize(request, env) {
   } catch { fail(401, 'Sessione non valida.'); }
   if (header.alg !== 'RS256' || typeof header.kid !== 'string') fail(401, 'Sessione non valida.');
   if (!keyCache || keyCache.issuer !== env.ACCESS_ISSUER || keyCache.expires < Date.now()) {
-    const response = await fetch(env.ACCESS_ISSUER + '/cdn-cgi/access/certs', { redirect: 'error' });
+    // Workers support only 'follow' and 'manual'; with 'manual' a redirect is not ok and is rejected.
+    const response = await fetch(env.ACCESS_ISSUER + '/cdn-cgi/access/certs', { redirect: 'manual' });
     if (!response.ok) fail(503, 'Verifica accesso temporaneamente non disponibile.');
     const jwks = await response.json();
     keyCache = { issuer: env.ACCESS_ISSUER, keys: jwks.keys, expires: Date.now() + 300000 };
@@ -163,7 +164,7 @@ export default {
     const admin = path === '/admin' || path.startsWith('/admin/') || path.startsWith('/api/admin/');
     try { return secure(await route(request, env), admin); }
     catch (error) {
-      if (!(error instanceof HttpError)) console.error('Request failed:', error.name);
+      if (!(error instanceof HttpError)) console.error('Request failed:', error.name, error.message);
       return secure(json({ error: error instanceof HttpError ? error.message : 'Servizio temporaneamente non disponibile.' }, error.status || 503), admin);
     }
   }

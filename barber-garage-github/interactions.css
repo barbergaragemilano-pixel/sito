@@ -10,4 +10,5 @@
 
 [hidden]{display:none !important;}
 @media(min-width:900px){[data-nav-links]{display:flex !important;}}
+@media(max-width:899px){[data-address]{white-space:normal !important;text-wrap:balance;}}
 a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:4px;}
